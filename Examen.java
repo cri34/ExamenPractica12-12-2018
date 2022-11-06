@@ -48,6 +48,23 @@ public class Examen {
             currentCountToChangeLine++;
             System.out.print(" " + array[index]);
         }
+        System.out.println();
     }
 
+    //2 descomposición de factores
+    public void returnFactorDecomposition(int numberToDescompose) {
+        int[] primeNumbers = returnPrimeNumbersToMaxNumber(numberToDescompose);
+        int dividend = numberToDescompose;
+        int indexDivider = 0;
+        System.out.println("Factor Descomposition of number "+ numberToDescompose);
+        while (dividend != 1) {
+            if (dividend % primeNumbers[indexDivider] == 0) {
+                dividend = dividend / primeNumbers[indexDivider];
+                System.out.print(" "+primeNumbers[indexDivider]);
+            }
+            if (dividend % primeNumbers[indexDivider] != 0){
+                indexDivider++;
+            }
+        }
+    }
 }

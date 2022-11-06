@@ -1,35 +1,22 @@
 public class Examen {
-    private int returnIndexFirstPosiblePrimeNumber(boolean[] isPrimeNumber, int primeNumberOperator) {
-        int index;
-        int indexNumber = 0;
-        for (index = 0; index < isPrimeNumber.length; index++) {
-            indexNumber = index + 1;
-            if (isPrimeNumber[index] && indexNumber > primeNumberOperator) {
-                break;
-            }
-        }
-        return indexNumber;
-    }
-
+    //1
     private boolean[] checkPrimeNumbersToMaxNumber(int maxNumber) {
         boolean[] isPrimeNumber = new boolean[maxNumber];
-        int maxIteration = (int) Math.sqrt(maxNumber);
-        int currentPrimeNumberOperator = 2;
-        int indCurrentPrimeNumberOperator = currentPrimeNumberOperator - 1;
-        int indexNumber;
-        int iteration = 0;
-        final int firstIteration = 1;
-        while (++iteration <= maxIteration) {
-            for (int index = indCurrentPrimeNumberOperator; index < isPrimeNumber.length; index++) {
-                indexNumber = index + 1;
-                if (iteration == firstIteration || isPrimeNumber[index]) {
-                    isPrimeNumber[index] = indexNumber % currentPrimeNumberOperator != 0 || indexNumber == currentPrimeNumberOperator;
+        final int maxOperator = (int) Math.sqrt(maxNumber);
+
+        for (int index = 1; index < isPrimeNumber.length; index++) {
+            isPrimeNumber[index] = true;
+        }
+        for (int operator = 2; operator <= maxOperator; operator++) {
+            for (int number = 2; number * operator <= isPrimeNumber.length; number++) {
+                if (isPrimeNumber[(number * operator) - 1]) {
+                    isPrimeNumber[(number * operator) - 1] = false;
                 }
             }
-            currentPrimeNumberOperator = returnIndexFirstPosiblePrimeNumber(isPrimeNumber, currentPrimeNumberOperator);
         }
         return isPrimeNumber;
     }
+
 
     public int[] returnPrimeNumbersToMaxNumber(int maxNumber) {
         boolean[] isPrimeNumbers = checkPrimeNumbersToMaxNumber(maxNumber);
@@ -62,4 +49,5 @@ public class Examen {
             System.out.print(" " + array[index]);
         }
     }
+
 }
